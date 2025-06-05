@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { BORDER_COLORS, MESSAGE_COLORS } from "../configs/colors";
 import textStyles from "../tokens/textStyles";
+import Icon from "./Icon";
 
 type Props = {
   value: string;
@@ -26,6 +27,8 @@ type Props = {
   status?: "default" | "success" | "error";
   showSearchIcon?: boolean;
   showClearIcon?: boolean;
+  showEyeIcon?: boolean;
+  action?: () => void;
   onClear?: () => void;
   style?: StyleProp<ViewStyle>;
 } & TextInputProps;
@@ -38,8 +41,10 @@ export default function CustomTextInput({
   helperText,
   message,
   status = "default",
-  showSearchIcon = false,
-  showClearIcon = false,
+  showSearchIcon = true,
+  showClearIcon = true,
+  showEyeIcon = true,
+  action,
   onClear,
   style,
   ...props
@@ -63,7 +68,27 @@ export default function CustomTextInput({
         />
         {showClearIcon && value ? (
           <TouchableOpacity onPress={onClear}>
-            <Ionicons name="close" size={20} color="#888" style={styles.icon} />
+            <Icon
+              name="x-close_outlined"
+              size={20}
+              color="#888"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        ) : null}
+        {showEyeIcon && value ? (
+          <TouchableOpacity onPress={onClear}>
+            <Icon
+              name="eye_outlined"
+              size={20}
+              color="#888"
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        ) : null}
+        {action && value ? (
+          <TouchableOpacity onPress={action}>
+            <Text>اکشن</Text>
           </TouchableOpacity>
         ) : null}
       </View>

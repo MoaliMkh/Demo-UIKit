@@ -1,3 +1,4 @@
+import { useFonts } from "expo-font";
 import { useState } from "react";
 import { View } from "react-native";
 import CustomTextInput from "./components/CustomTextInput";
@@ -5,6 +6,10 @@ import borderRadius from "./tokens/borderRadius";
 import borderWidth from "./tokens/borderWidth";
 
 export default function Index() {
+  const [fontsLoaded] = useFonts({
+    IcoMoon: require("../assets/icomoon/icomoon.ttf"),
+  });
+
   const [value, setValue] = useState("");
 
   return (
